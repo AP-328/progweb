@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un contact</title>
+    <link rel="stylesheet" href="/newcontact.css">
+</head>
+<body>
+    <h2>Ajouter un contact</h2>
+
+    <form action="/contacts/new" method="POST">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="0" max="150" required />
+        </div>
+
+        <button type="submit">Add</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+[role="button"]:hover,
+[role="button"]:focus,
+[role="button"]:active {
+  color: blue;
+  cursor: pointer;
+}

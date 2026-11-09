@@ -1,8 +1,12 @@
-const DABASE_NAME = 'M2WEB'
-const collection  = 'contacts'
-const MONGO_URL = 'mongodb://localhost:27017';
+/* global process */
 
 import { MongoClient } from 'mongodb';
+
+process.loadEnvFile('../.env');
+
+const DATABASE_NAME = process.env.DATABASE_NAME;
+const COLLECTION = process.env.COLLECTION;
+const MONGO_URL = process.env.MONGO_URL;
 
 async function printAllContacts(collection) {
     const results = await collection.find().toArray();
@@ -12,20 +16,23 @@ async function printAllContacts(collection) {
 }
 
 async function main() {
-    let client;
+    let connection = null;
     try {
-        console.log('Trying to connect...')
-        const client = new MongoClient(MONGO_URL);        
-        const db = client.db(DABASE_NAME);
-        console.log("Successfully connected to MongoDB.");
-        const contacts = db.collection(collection);
-        await client.connect();
+        console.log('Trying to connect...');
+        const client = new MongoClient(MONGO_URL);
+        /* , {
+           useNewUrlParser: true
+       });*/
+        connection = await client.connect();
+        console.log('Successfully connected to MongoDB.');
+        const db = connection.db(DATABASE_NAME);
+        const contacts = db.collection(COLLECTION);
         await printAllContacts(contacts);
     } catch (e) {
-        console.error(e)
+        console.error(e);
     } finally {
-        if (client) {
-            client.close();
+        if (connection) {
+            connection.close();
         }
     }
 }

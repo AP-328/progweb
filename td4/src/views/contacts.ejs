@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des contacts</title>
+    <link rel="stylesheet" href="/contacts.css">
+    <link rel="stylesheet" href="/rolebutton.css">
+</head>
+
+<body>
+    <h1>Liste des contacts</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Âge</th>
+                <th scope="col">Identifiant</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% contacts.forEach(function(entry) { %>
+                <tr>
+                    <td scope="row">
+                        <%= entry.name %>
+                    </td>
+                    <td>
+                        <%= entry.age %>
+                    </td>
+                    <td>
+                        <span role="button" onclick="location.href='/contact/<%= entry._id %>'">
+                            <%= entry._id %>
+                        </span>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</body>
+
+</html>
